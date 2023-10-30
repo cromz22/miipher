@@ -1,5 +1,7 @@
 examples/outputs/
 examples/preprocessed_data/
+examples/pretrained_models/
+src/miipher/__pycache__/
 *.pyc
 *.tsv
 *.ipynb
