@@ -5,21 +5,42 @@ Please note that the model provided in this repository doesn't represent the per
 
 ## Installation
 
-This repository uses [rye](https://github.com/mitsuhiko/rye) as the Python package manager.
-Run the following commands to install the dependencies:
+To use `miipher` as a package, install the directory with pip.
 
 ```
-rye pin 3.10
+pip install git+https://github.com/cromz22/miipher
+```
+
+Alternatively, if you would like to make some changes to the code, clone the repository and use [rye](https://github.com/mitsuhiko/rye) to install the dependencies.
+
+```
+git clone git@github.com:cromz22/miipher.git
+cd miipher
 rye sync
 ```
 
+By default, this should create `miipher/.venv` and install packages there.
+Type `. .venv/bin/activate` to activate the environment.
+
 ## Pretrained model
 
-The pretrained model is trained on [LibriTTS-R](http://www.openslr.org/141/) and [JVS corpus](https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus), and provided in **CC-BY-NC-2.0 license**.
+The pretrained model is trained on [LibriTTS-R](http://www.openslr.org/141/) and [JVS](https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus) corpora, and provided in **CC-BY-NC-2.0 license**.
 
-The models are hosted on [huggingface](https://huggingface.co/spaces/Wataru/Miipher/).
+The model is hosted on [huggingface](https://huggingface.co/spaces/Wataru/Miipher/).
 
-To use pretrained model, please refer to `examples/demo.py`.
+### Using the pretrained model
+
+If you would like to run the web app:
+
+```
+python3 examples/demo.py
+```
+
+If you would like to use the model from command line:
+
+```
+python3 examples/predict.py --input-wav-path /path/to/input.wav --output-wav-path /path/to/output.wav --transcript "your transcript" --lang-code "eng-us"
+```
 
 ## Differences from the original paper
 
