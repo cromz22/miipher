@@ -1,9 +1,6 @@
 import hydra
-from lightning.pytorch.core import datamodule
 from omegaconf import DictConfig
-from lightning.pytorch import Trainer, seed_everything
 import torch
-from miipher import lightning_module
 from miipher.lightning_module import MiipherLightningModule
 from miipher.dataset.datamodule import MiipherDataModule
 
