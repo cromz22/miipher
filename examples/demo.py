@@ -23,15 +23,13 @@ preprocessor = PreprocessForInfer(miipher.cfg)
 @torch.inference_mode()
 def main(wav_path, transcript, lang_code):
     wav, sr = torchaudio.load(wav_path)
-    wav = wav[0].unsqueeze(0)
     batch = preprocessor.process(
-        "test",
-        (torch.tensor(wav), sr),
+        basename="test",
+        degraded_audio_tuple=(wav, sr),
         word_segmented_text=transcript,
         lang_code=lang_code,
     )
 
-    miipher.feature_extractor(batch)
     (
         phone_feature,
         speaker_feature,
@@ -46,9 +44,9 @@ def main(wav_path, transcript, lang_code):
     ).squeeze(1)
     cleaned_wav = vocoder.generator_forward(
         {"input_feature": cleaned_ssl_feature, "xvector": vocoder_xvector}
-    )[0].T
+    )[0]
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as fp:
-        torchaudio.save(fp, cleaned_wav.view(1, -1), sample_rate=22050, format="wav")
+        torchaudio.save(fp, cleaned_wav, sample_rate=22050, format="wav")
         return fp.name
 
 

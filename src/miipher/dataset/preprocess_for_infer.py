@@ -31,13 +31,13 @@ class PreprocessForInfer(torch.nn.Module):
 
     def process(
         self,
-        basename,
-        degraded_audio,
-        word_segmented_text=None,
-        lang_code=None,
+        basename: str,
+        degraded_audio_tuple: tuple[torch.Tensor, int],
+        word_segmented_text: str | None=None,
+        lang_code: str | None=None,
         phoneme_text=None,
     ):
-        degraded_audio, sr = degraded_audio
+        degraded_audio, sr = degraded_audio_tuple
         output = dict()
 
         if word_segmented_text != None and lang_code != None:
